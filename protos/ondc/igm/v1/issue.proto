@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package igm.v1;
 
-option go_package = "github.com/parthav-effimove/ONDC-Protos/protos/ondc/igm/v1;igmb";
+option go_package = "github.com/parthav-effimove/ONDC-Protos/protos/ondc/igm/v1;v1";
 
 service IssueService{
     rpc CreateIssue(CreateIssueRequest) returns(CreateIssueResponse);

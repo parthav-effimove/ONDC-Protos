@@ -4,7 +4,7 @@
 // 	protoc        v6.32.1
 // source: protos/ondc/igm/v1/issue.proto
 
-package igmb
+package v1
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -2536,7 +2536,7 @@ const file_protos_ondc_igm_v1_issue_proto_rawDesc = "" +
 	"\x10ListIssueByOrder\x12\x1f.igm.v1.ListIssueByOrderRequest\x1a\x19.igm.v1.ListIssueResponse\x12L\n" +
 	"\x11HandleIssueStatus\x12\x1a.igm.v1.IssueStatusRequest\x1a\x1b.igm.v1.IssueStatusResponse\x12@\n" +
 	"\rHandleOnIssue\x12\x16.igm.v1.OnIssueRequest\x1a\x17.igm.v1.OnIssueResponse\x12R\n" +
-	"\x13HandleOnIssueStatus\x12\x1c.igm.v1.OnIssueStatusRequest\x1a\x1d.igm.v1.OnIssueStatusResponseBAZ?github.com/parthav-effimove/ONDC-Protos/protos/ondc/igm/v1;igmbb\x06proto3"
+	"\x13HandleOnIssueStatus\x12\x1c.igm.v1.OnIssueStatusRequest\x1a\x1d.igm.v1.OnIssueStatusResponseB?Z=github.com/parthav-effimove/ONDC-Protos/protos/ondc/igm/v1;v1b\x06proto3"
 
 var (
 	file_protos_ondc_igm_v1_issue_proto_rawDescOnce sync.Once

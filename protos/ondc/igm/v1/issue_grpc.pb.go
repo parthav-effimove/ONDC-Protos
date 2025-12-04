@@ -4,7 +4,7 @@
 // - protoc             v6.32.1
 // source: protos/ondc/igm/v1/issue.proto
 
-package igmb
+package v1
 
 import (
 	context "context"
