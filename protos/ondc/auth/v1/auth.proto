@@ -1,0 +1,340 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "github.com/parthav-effimove/ONDC-Protos/protos/ondc/auth/v1;v1";
+;
+
+service AuthService {
+    rpc SignUp(SignUpRequest) returns (SignUpResponse);
+    rpc SignIn(SignInRequest) returns (SignInResponse);
+    rpc SignOut(SignOutRequest) returns (SignOutResponse);
+    rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenResponse); //calls when access token expires 
+
+    rpc SendOTP(SendOTPRequest) returns (SendOTPResponse);
+    rpc VerifyOTP(VerifyOTPRequest) returns(VerifyOTPResponse);
+
+    rpc ValidateToken( ValidateTokenRequest) returns (ValidateTokenResponse);
+    rpc RevokeToken(RevokeTokenRequest) returns (RevokeTokenResponse);
+    rpc RevokeAllTokens(RevokeAllTokensRequest) returns (RevokeAllTokensResponse);
+
+    rpc GetUserInfo( GetUserInfoRequest) returns (GetUserInfoResponse);
+    rpc GetUserRoles(GetUserRolesRequest) returns (GetUserRolesResponse);
+    rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
+
+    rpc ChangePassword(ChangePasswordRequest) returns (ChangePasswordResponse);//user knows old password
+    rpc ResetPasswordRequest (ResetPasswordRequestMsg) returns (ResetPasswordResponse);//user doesnt know old password reset link sent to mail/phone
+    rpc ResetPassword(ResetPasswordMsg) returns (ResetPasswordResponse);//user clicks the the link and request the new password
+
+    rpc CreatePermission(CreatePermissionRequest) returns(CreatePermissionResponse);
+    rpc UpdatePermission(UpdatePermissionRequest) returns (UpdatePermissionResponse);
+    rpc DeletePermission(DeletePermissionRequest) returns (DeletePermissionResponse);
+    rpc GetAllPermissions(GetAllPermissionsRequest) returns (GetAllPermissionsResponse);
+    rpc GetPermissionByService(GetAllPermissionsRequest) returns (GetPermissionByServiceResponse);
+    rpc GetUserPermission(GetUserPermissionRequest) returns (GetUserPermissionResponse);
+    rpc AssignPermissionToUser(AssignPermissionToUserRequest) returns (AssignPermissionToUserResponse);
+    rpc RemovePermissionFromUser(RemovePermissionFromUserRequest) returns (RemovePermissionFromUserResponse);
+    rpc AssignPermissionToRole(AssignPermissionToRoleRequest) returns (AssignPermissionToRoleResponse);
+    rpc RemovePermissionFromRole(RemovePermissionFromRoleRequest) returns (RemovePermissionFromRoleResponse);
+
+}
+
+
+//+++++++++++++++++++Authentication+++++++++++++++++++++
+message SignUpRequest{
+    string email = 1;
+    string password = 2;
+    string name = 3;
+    string phone = 4;
+}
+
+message SignUpResponse{
+    bool success = 1;
+    string message = 2;
+    string user_id = 3;
+}
+
+message SignInRequest{
+    string email = 1;
+    string password = 2;
+    string phone = 3;
+}
+
+message SignInResponse{
+    bool success = 1;
+    string message = 2;
+    string access_token = 3;
+    string refresh_token = 4;
+    int64 expires_in = 5;
+    UserInfo user = 6;
+}
+
+message SignOutRequest{
+    string refresh_token = 1;
+}
+
+message SignOutResponse{
+    bool success = 1;
+    string message = 2;
+}
+
+message RefreshTokenRequest{
+    string refresh_token = 1;
+}
+
+message RefreshTokenResponse{
+    bool success = 1;
+    string message = 2;
+    string access_token = 3; //new fresh token
+    string refresh_token = 4;
+    int64 expires_in = 5;
+}
+
+//++++++++++++++++++++++++OTP+++++++++++
+
+message SendOTPRequest {
+    string phone = 1;
+}
+
+message SendOTPResponse {
+    bool success = 1;
+    string message = 2;
+    string request_id = 3;
+    string expires_in = 4;
+}
+
+message VerifyOTPRequest{
+    string phone = 1;
+    string otp =2;
+    string request_id = 3;
+}
+
+message VerifyOTPResponse {
+    bool success = 1;
+    string message = 2;
+    string access_token = 3;
+    string refresh_token = 4;
+    int64 expires_in = 5;
+    UserInfo user = 6;
+}
+
+//++++++++++++++++Token Managememt+++++++++++++++
+message ValidateTokenRequest{
+    string token = 1;
+}
+
+message ValidateTokenResponse{
+    bool valid = 1;
+    string user_id = 2;
+    string email = 3;
+    string phone = 4;
+    repeated string roles = 5;
+    repeated string permissions = 6;
+    int64 expires_at = 7;
+    string message = 8;
+}
+
+message RevokeTokenRequest{
+    string refresh_token = 1;
+}
+
+message RevokeTokenResponse{
+    bool success = 1;
+    string message = 2;
+}
+
+message RevokeAllTokensRequest{
+    string user_id = 1;
+}
+
+message RevokeAllTokensResponse{
+    bool success = 1;
+    int32 revoked_count = 2;
+    string message = 3;
+}
+
+//+++++++++++++++User Management+++++++++++
+
+message GetUserInfoRequest{
+    string user_id = 1;
+}
+
+message GetUserInfoResponse{
+    bool success = 1;
+    UserInfo user = 2;
+    string message = 3;
+}
+
+message GetUserRolesRequest{
+    string user_id = 1;
+}
+
+message GetUserRolesResponse{
+    bool success = 1;
+    repeated string roles = 2;
+    string message = 3;
+}
+
+message UpdateUserRequest{
+    string user_id = 1;
+    string name = 2;
+    string email = 3;
+    string phone = 4;
+}
+
+message UpdateUserResponse{
+    bool success = 1;
+    string message = 2;
+    UserInfo user = 3;
+}
+
+//+++++++++++++++Password Management+++++++++++++++
+
+message ChangePasswordRequest{
+    string user_id = 1;
+    string old_password = 2;
+    string new_password = 3;
+}
+
+message ChangePasswordResponse{
+    bool success = 1;
+    string message = 2;
+}
+
+message ResetPasswordRequestMsg{
+    string email = 1;
+}
+
+message ResetPasswordMsg{
+    string reset_token = 1;
+    string new_password = 2;
+}
+
+message ResetPasswordResponse {
+    bool success = 1;
+    string message = 2;
+}
+
+message UserInfo {
+    string user_id = 1;
+    string email = 2;
+    string name = 3;
+    string phone = 4;
+    repeated string roles = 5;
+    bool is_active = 6;
+    int64 created_at = 7;
+}
+
+//++++++++++++++permission management+++++++++++++++++
+message Permission{
+    string id = 1;
+    string name = 2;
+    string service = 3;
+    string resource = 4;
+    string action = 5;
+    string description = 6;
+}
+
+message CreatePermissionRequest{
+    string name =1;
+    string service = 2;
+    string resource = 3;
+    string action = 4;
+    string description = 5;
+
+}
+
+message CreatePermissionResponse{
+    bool success = 1;
+    string message = 2;
+    Permission permission = 3;
+}
+
+message GetAllPermissionsRequest{}
+
+message GetAllPermissionsResponse{
+    bool success = 1;
+    repeated Permission Permissions = 2;
+}
+
+message GetPermissionByServiceRequest{
+    string service = 1;
+}
+
+message GetPermissionByServiceResponse{
+    bool success = 1;
+    repeated Permission permissions = 2;
+}
+
+message GetUserPermissionRequest{
+    string user_id = 1;
+}
+
+message GetUserPermissionResponse {
+    bool success = 1;
+    repeated Permission permissions = 2;
+}
+
+message AssignPermissionToUserRequest{
+    string user_id = 1;
+    string permission_id = 2;
+}
+
+message AssignPermissionToUserResponse{
+    bool success = 1;
+    string message = 2;
+}
+
+message RemovePermissionFromUserRequest{
+    string user_id = 1;
+    string permission_id = 2;
+}
+
+message RemovePermissionFromUserResponse{
+    bool success = 1;
+    string message = 2;
+}
+
+message AssignPermissionToRoleRequest{
+    string role_id =1;
+    string permission_id= 2;
+}
+
+message AssignPermissionToRoleResponse{
+    bool success = 1;
+    string message = 2;
+}
+
+message RemovePermissionFromRoleRequest{
+    string role_id = 1;
+    string permission_id = 2;
+}
+
+message RemovePermissionFromRoleResponse{
+    bool success =1;
+    string message = 2;
+}
+
+message UpdatePermissionRequest{
+    string permission_id = 1;
+    string name = 2;
+    string service = 3;
+    string resource = 4;
+    string action = 5;
+    string description = 6;
+}
+
+message UpdatePermissionResponse{
+    bool success = 1;
+    string message =2;
+    Permission permission = 3;
+}
+
+message DeletePermissionRequest{
+    string permission_id = 1;
+}
+
+message DeletePermissionResponse{
+    bool success = 1;
+    string message = 2;
+}
