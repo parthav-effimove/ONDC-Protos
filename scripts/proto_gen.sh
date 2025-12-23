@@ -25,7 +25,7 @@ for PROTO_FILE in $PROTO_FILES; do
         --go-grpc_opt=paths=source_relative \
         "$PROTO_FILE"
     
-    echo "✓ Generated $PROTO_FILE"
+    echo " Generated $PROTO_FILE"
     echo ""
 done
 
