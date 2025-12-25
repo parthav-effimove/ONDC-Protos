@@ -6,13 +6,13 @@ option go_package = "github.com/parthav-effimove/ONDC-Protos/protos/ondc/auth/v1
 ;
 
 service AuthService {
-    rpc SignUp(SignUpRequest) returns (SignUpResponse);
-    rpc SignIn(SignInRequest) returns (SignInResponse);
+    rpc SignUp(SignUpRequest) returns (AuthResponse);
+    rpc SignIn(SignInRequest) returns (AuthResponse);
     rpc SignOut(SignOutRequest) returns (SignOutResponse);
-    rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenResponse); //calls when access token expires 
+    rpc RefreshToken(RefreshTokenRequest) returns (AuthResponse); //calls when access token expires 
 
     rpc SendOTP(SendOTPRequest) returns (SendOTPResponse);
-    rpc VerifyOTP(VerifyOTPRequest) returns(VerifyOTPResponse);
+    rpc VerifyOTP(VerifyOTPRequest) returns(AuthResponse);
 
     rpc ValidateToken( ValidateTokenRequest) returns (ValidateTokenResponse);
     rpc RevokeToken(RevokeTokenRequest) returns (RevokeTokenResponse);
@@ -41,6 +41,17 @@ service AuthService {
 
 
 //+++++++++++++++++++Authentication+++++++++++++++++++++
+
+message AuthResponse {
+    bool success = 1;
+    string message = 2;
+    string access_token = 3;
+    string refresh_token = 4;
+    string expires_in = 5;
+    string token_type = 6;
+    UserInfo user = 7;
+}
+
 message SignUpRequest{
     string email = 1;
     string password = 2;
@@ -48,11 +59,7 @@ message SignUpRequest{
     string phone = 4;
 }
 
-message SignUpResponse{
-    bool success = 1;
-    string message = 2;
-    string user_id = 3;
-}
+
 
 message SignInRequest{
     string email = 1;
@@ -60,14 +67,7 @@ message SignInRequest{
     string phone = 3;
 }
 
-message SignInResponse{
-    bool success = 1;
-    string message = 2;
-    string access_token = 3;
-    string refresh_token = 4;
-    int64 expires_in = 5;
-    UserInfo user = 6;
-}
+
 
 message SignOutRequest{
     string refresh_token = 1;
@@ -82,13 +82,7 @@ message RefreshTokenRequest{
     string refresh_token = 1;
 }
 
-message RefreshTokenResponse{
-    bool success = 1;
-    string message = 2;
-    string access_token = 3; //new fresh token
-    string refresh_token = 4;
-    int64 expires_in = 5;
-}
+
 
 //++++++++++++++++++++++++OTP+++++++++++
 
@@ -109,14 +103,7 @@ message VerifyOTPRequest{
     string request_id = 3;
 }
 
-message VerifyOTPResponse {
-    bool success = 1;
-    string message = 2;
-    string access_token = 3;
-    string refresh_token = 4;
-    int64 expires_in = 5;
-    UserInfo user = 6;
-}
+
 
 //++++++++++++++++Token Managememt+++++++++++++++
 message ValidateTokenRequest{
@@ -221,8 +208,11 @@ message UserInfo {
     string name = 3;
     string phone = 4;
     repeated string roles = 5;
-    bool is_active = 6;
-    int64 created_at = 7;
+    repeated string permissions = 6;
+    bool is_active = 7;
+    bool is_verified = 8;
+    int64 created_at = 9;
+    int64 updated_at = 10;
 }
 
 //++++++++++++++permission management+++++++++++++++++
