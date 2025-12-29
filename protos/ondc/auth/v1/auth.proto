@@ -223,6 +223,8 @@ message Permission{
     string resource = 4;
     string action = 5;
     string description = 6;
+    int64 created_at = 7;
+    int64 updated_at = 8;
 }
 
 message CreatePermissionRequest{
@@ -231,6 +233,7 @@ message CreatePermissionRequest{
     string resource = 3;
     string action = 4;
     string description = 5;
+   
 
 }
 
