@@ -69,7 +69,7 @@ type AuthServiceClient interface {
 	UpdatePermission(ctx context.Context, in *UpdatePermissionRequest, opts ...grpc.CallOption) (*UpdatePermissionResponse, error)
 	DeletePermission(ctx context.Context, in *DeletePermissionRequest, opts ...grpc.CallOption) (*DeletePermissionResponse, error)
 	GetAllPermissions(ctx context.Context, in *GetAllPermissionsRequest, opts ...grpc.CallOption) (*GetAllPermissionsResponse, error)
-	GetPermissionByService(ctx context.Context, in *GetAllPermissionsRequest, opts ...grpc.CallOption) (*GetPermissionByServiceResponse, error)
+	GetPermissionByService(ctx context.Context, in *GetPermissionByServiceRequest, opts ...grpc.CallOption) (*GetPermissionByServiceResponse, error)
 	GetUserPermission(ctx context.Context, in *GetUserPermissionRequest, opts ...grpc.CallOption) (*GetUserPermissionResponse, error)
 	AssignPermissionToUser(ctx context.Context, in *AssignPermissionToUserRequest, opts ...grpc.CallOption) (*AssignPermissionToUserResponse, error)
 	RemovePermissionFromUser(ctx context.Context, in *RemovePermissionFromUserRequest, opts ...grpc.CallOption) (*RemovePermissionFromUserResponse, error)
@@ -275,7 +275,7 @@ func (c *authServiceClient) GetAllPermissions(ctx context.Context, in *GetAllPer
 	return out, nil
 }
 
-func (c *authServiceClient) GetPermissionByService(ctx context.Context, in *GetAllPermissionsRequest, opts ...grpc.CallOption) (*GetPermissionByServiceResponse, error) {
+func (c *authServiceClient) GetPermissionByService(ctx context.Context, in *GetPermissionByServiceRequest, opts ...grpc.CallOption) (*GetPermissionByServiceResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetPermissionByServiceResponse)
 	err := c.cc.Invoke(ctx, AuthService_GetPermissionByService_FullMethodName, in, out, cOpts...)
@@ -358,7 +358,7 @@ type AuthServiceServer interface {
 	UpdatePermission(context.Context, *UpdatePermissionRequest) (*UpdatePermissionResponse, error)
 	DeletePermission(context.Context, *DeletePermissionRequest) (*DeletePermissionResponse, error)
 	GetAllPermissions(context.Context, *GetAllPermissionsRequest) (*GetAllPermissionsResponse, error)
-	GetPermissionByService(context.Context, *GetAllPermissionsRequest) (*GetPermissionByServiceResponse, error)
+	GetPermissionByService(context.Context, *GetPermissionByServiceRequest) (*GetPermissionByServiceResponse, error)
 	GetUserPermission(context.Context, *GetUserPermissionRequest) (*GetUserPermissionResponse, error)
 	AssignPermissionToUser(context.Context, *AssignPermissionToUserRequest) (*AssignPermissionToUserResponse, error)
 	RemovePermissionFromUser(context.Context, *RemovePermissionFromUserRequest) (*RemovePermissionFromUserResponse, error)
@@ -431,7 +431,7 @@ func (UnimplementedAuthServiceServer) DeletePermission(context.Context, *DeleteP
 func (UnimplementedAuthServiceServer) GetAllPermissions(context.Context, *GetAllPermissionsRequest) (*GetAllPermissionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAllPermissions not implemented")
 }
-func (UnimplementedAuthServiceServer) GetPermissionByService(context.Context, *GetAllPermissionsRequest) (*GetPermissionByServiceResponse, error) {
+func (UnimplementedAuthServiceServer) GetPermissionByService(context.Context, *GetPermissionByServiceRequest) (*GetPermissionByServiceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPermissionByService not implemented")
 }
 func (UnimplementedAuthServiceServer) GetUserPermission(context.Context, *GetUserPermissionRequest) (*GetUserPermissionResponse, error) {
@@ -813,7 +813,7 @@ func _AuthService_GetAllPermissions_Handler(srv interface{}, ctx context.Context
 }
 
 func _AuthService_GetPermissionByService_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAllPermissionsRequest)
+	in := new(GetPermissionByServiceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -825,7 +825,7 @@ func _AuthService_GetPermissionByService_Handler(srv interface{}, ctx context.Co
 		FullMethod: AuthService_GetPermissionByService_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServiceServer).GetPermissionByService(ctx, req.(*GetAllPermissionsRequest))
+		return srv.(AuthServiceServer).GetPermissionByService(ctx, req.(*GetPermissionByServiceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

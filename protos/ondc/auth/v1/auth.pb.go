@@ -2982,7 +2982,7 @@ const file_protos_ondc_auth_v1_auth_proto_rawDesc = "" +
 	"\rpermission_id\x18\x01 \x01(\tR\fpermissionId\"N\n" +
 	"\x18DeletePermissionResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage2\x91\x0f\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage2\x96\x0f\n" +
 	"\vAuthService\x121\n" +
 	"\x06SignUp\x12\x13.auth.SignUpRequest\x1a\x12.auth.AuthResponse\x121\n" +
 	"\x06SignIn\x12\x13.auth.SignInRequest\x1a\x12.auth.AuthResponse\x126\n" +
@@ -3003,8 +3003,8 @@ const file_protos_ondc_auth_v1_auth_proto_rawDesc = "" +
 	"\x10CreatePermission\x12\x1d.auth.CreatePermissionRequest\x1a\x1e.auth.CreatePermissionResponse\x12Q\n" +
 	"\x10UpdatePermission\x12\x1d.auth.UpdatePermissionRequest\x1a\x1e.auth.UpdatePermissionResponse\x12Q\n" +
 	"\x10DeletePermission\x12\x1d.auth.DeletePermissionRequest\x1a\x1e.auth.DeletePermissionResponse\x12T\n" +
-	"\x11GetAllPermissions\x12\x1e.auth.GetAllPermissionsRequest\x1a\x1f.auth.GetAllPermissionsResponse\x12^\n" +
-	"\x16GetPermissionByService\x12\x1e.auth.GetAllPermissionsRequest\x1a$.auth.GetPermissionByServiceResponse\x12T\n" +
+	"\x11GetAllPermissions\x12\x1e.auth.GetAllPermissionsRequest\x1a\x1f.auth.GetAllPermissionsResponse\x12c\n" +
+	"\x16GetPermissionByService\x12#.auth.GetPermissionByServiceRequest\x1a$.auth.GetPermissionByServiceResponse\x12T\n" +
 	"\x11GetUserPermission\x12\x1e.auth.GetUserPermissionRequest\x1a\x1f.auth.GetUserPermissionResponse\x12c\n" +
 	"\x16AssignPermissionToUser\x12#.auth.AssignPermissionToUserRequest\x1a$.auth.AssignPermissionToUserResponse\x12i\n" +
 	"\x18RemovePermissionFromUser\x12%.auth.RemovePermissionFromUserRequest\x1a&.auth.RemovePermissionFromUserResponse\x12c\n" +
@@ -3102,7 +3102,7 @@ var file_protos_ondc_auth_v1_auth_proto_depIdxs = []int32{
 	44, // 24: auth.AuthService.UpdatePermission:input_type -> auth.UpdatePermissionRequest
 	46, // 25: auth.AuthService.DeletePermission:input_type -> auth.DeletePermissionRequest
 	30, // 26: auth.AuthService.GetAllPermissions:input_type -> auth.GetAllPermissionsRequest
-	30, // 27: auth.AuthService.GetPermissionByService:input_type -> auth.GetAllPermissionsRequest
+	32, // 27: auth.AuthService.GetPermissionByService:input_type -> auth.GetPermissionByServiceRequest
 	34, // 28: auth.AuthService.GetUserPermission:input_type -> auth.GetUserPermissionRequest
 	36, // 29: auth.AuthService.AssignPermissionToUser:input_type -> auth.AssignPermissionToUserRequest
 	38, // 30: auth.AuthService.RemovePermissionFromUser:input_type -> auth.RemovePermissionFromUserRequest

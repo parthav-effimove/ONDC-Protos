@@ -30,7 +30,7 @@ service AuthService {
     rpc UpdatePermission(UpdatePermissionRequest) returns (UpdatePermissionResponse);
     rpc DeletePermission(DeletePermissionRequest) returns (DeletePermissionResponse);
     rpc GetAllPermissions(GetAllPermissionsRequest) returns (GetAllPermissionsResponse);
-    rpc GetPermissionByService(GetAllPermissionsRequest) returns (GetPermissionByServiceResponse);
+    rpc GetPermissionByService(GetPermissionByServiceRequest) returns (GetPermissionByServiceResponse);
     rpc GetUserPermission(GetUserPermissionRequest) returns (GetUserPermissionResponse);
     rpc AssignPermissionToUser(AssignPermissionToUserRequest) returns (AssignPermissionToUserResponse);
     rpc RemovePermissionFromUser(RemovePermissionFromUserRequest) returns (RemovePermissionFromUserResponse);
