@@ -3,29 +3,29 @@ syntax = "proto3";
 package auth;
 
 option go_package = "github.com/parthav-effimove/ONDC-Protos/protos/ondc/auth/v1;v1";
-;
 
 service AuthService {
     rpc SignUp(SignUpRequest) returns (AuthResponse);
     rpc SignIn(SignInRequest) returns (AuthResponse);
     rpc SignOut(SignOutRequest) returns (SignOutResponse);
-    rpc RefreshToken(RefreshTokenRequest) returns (AuthResponse); //calls when access token expires 
+    rpc RefreshToken(RefreshTokenRequest) returns (AuthResponse);
 
     rpc SendOTP(SendOTPRequest) returns (SendOTPResponse);
     rpc VerifyOTP(VerifyOTPRequest) returns(AuthResponse);
 
-    rpc ValidateToken( ValidateTokenRequest) returns (ValidateTokenResponse);
+    rpc ValidateToken(ValidateTokenRequest) returns (ValidateTokenResponse);
     rpc RevokeToken(RevokeTokenRequest) returns (RevokeTokenResponse);
     rpc RevokeAllTokens(RevokeAllTokensRequest) returns (RevokeAllTokensResponse);
 
-    rpc GetUserInfo( GetUserInfoRequest) returns (GetUserInfoResponse);
+    rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse);
     rpc GetUserRoles(GetUserRolesRequest) returns (GetUserRolesResponse);
     rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
 
-    rpc ChangePassword(ChangePasswordRequest) returns (ChangePasswordResponse);//user knows old password
-    rpc ResetPasswordRequest (ResetPasswordRequestMsg) returns (ResetPasswordResponse);//user doesnt know old password reset link sent to mail/phone
-    rpc ResetPassword(ResetPasswordMsg) returns (ResetPasswordResponse);//user clicks the the link and request the new password
+    rpc ChangePassword(ChangePasswordRequest) returns (ChangePasswordResponse);
+    rpc ResetPasswordRequest(ResetPasswordRequestMsg) returns (ResetPasswordResponse);
+    rpc ResetPassword(ResetPasswordMsg) returns (ResetPasswordResponse);
 
+    // Permission Management
     rpc CreatePermission(CreatePermissionRequest) returns(CreatePermissionResponse);
     rpc UpdatePermission(UpdatePermissionRequest) returns (UpdatePermissionResponse);
     rpc DeletePermission(DeletePermissionRequest) returns (DeletePermissionResponse);
@@ -34,20 +34,18 @@ service AuthService {
     rpc GetUserPermission(GetUserPermissionRequest) returns (GetUserPermissionResponse);
     rpc AssignPermissionToUser(AssignPermissionToUserRequest) returns (AssignPermissionToUserResponse);
     rpc RemovePermissionFromUser(RemovePermissionFromUserRequest) returns (RemovePermissionFromUserResponse);
-    rpc AssignPermissionToRole(AssignRoleToUserRequest) returns (AssignRoleToUserResponse);
+    rpc AssignPermissionToRole(AssignPermissionToRoleRequest) returns (AssignPermissionToRoleResponse);
     rpc RemovePermissionFromRole(RemovePermissionFromRoleRequest) returns (RemovePermissionFromRoleResponse);
 
-
+    // Role Management
     rpc CreateRole(CreateRoleRequest) returns (CreateRoleResponse);
     rpc UpdateRole(UpdateRoleRequest) returns (UpdateRoleResponse);
     rpc DeleteRole(DeleteRoleRequest) returns (DeleteRoleResponse);
-    rpc GetAllRoles( GetAllRoleRequest) returns (GetAllRoleResponse);
-    rpc GetRolePermissions( GetRolePermissionsRequest) returns (GetRolePermissionsResponse);
-    rpc AssignRoleToUser( AssignPermissionToRoleRequest) returns (AssignRoleToUserResponse);
-    rpc RemoveRoleFromUser( RemoveRoleFromUserRequest) returns (RemoveRoleFromUserResponse);
-
+    rpc GetAllRoles(GetAllRoleRequest) returns (GetAllRoleResponse);
+    rpc GetRolePermissions(GetRolePermissionsRequest) returns (GetRolePermissionsResponse);
+    rpc AssignRoleToUser(AssignRoleToUserRequest) returns (AssignRoleToUserResponse);
+    rpc RemoveRoleFromUser(RemoveRoleFromUserRequest) returns (RemoveRoleFromUserResponse);
 }
-
 
 //+++++++++++++++++++Authentication+++++++++++++++++++++
 
@@ -68,15 +66,11 @@ message SignUpRequest{
     string phone = 4;
 }
 
-
-
 message SignInRequest{
     string email = 1;
     string password = 2;
     string phone = 3;
 }
-
-
 
 message SignOutRequest{
     string refresh_token = 1;
@@ -90,8 +84,6 @@ message SignOutResponse{
 message RefreshTokenRequest{
     string refresh_token = 1;
 }
-
-
 
 //++++++++++++++++++++++++OTP+++++++++++
 
@@ -108,13 +100,12 @@ message SendOTPResponse {
 
 message VerifyOTPRequest{
     string phone = 1;
-    string otp =2;
+    string otp = 2;
     string request_id = 3;
 }
 
-
-
 //++++++++++++++++Token Managememt+++++++++++++++
+
 message ValidateTokenRequest{
     string token = 1;
 }
@@ -225,6 +216,7 @@ message UserInfo {
 }
 
 //++++++++++++++permission management+++++++++++++++++
+
 message Permission{
     string id = 1;
     string name = 2;
@@ -237,13 +229,11 @@ message Permission{
 }
 
 message CreatePermissionRequest{
-    string name =1;
+    string name = 1;
     string service = 2;
     string resource = 3;
     string action = 4;
     string description = 5;
-   
-
 }
 
 message CreatePermissionResponse{
@@ -298,8 +288,8 @@ message RemovePermissionFromUserResponse{
 }
 
 message AssignPermissionToRoleRequest{
-    string role_id =1;
-    string permission_id= 2;
+    string role_id = 1;
+    string permission_id = 2;
 }
 
 message AssignPermissionToRoleResponse{
@@ -313,7 +303,7 @@ message RemovePermissionFromRoleRequest{
 }
 
 message RemovePermissionFromRoleResponse{
-    bool success =1;
+    bool success = 1;
     string message = 2;
 }
 
@@ -328,7 +318,7 @@ message UpdatePermissionRequest{
 
 message UpdatePermissionResponse{
     bool success = 1;
-    string message =2;
+    string message = 2;
     Permission permission = 3;
 }
 
@@ -341,8 +331,8 @@ message DeletePermissionResponse{
     string message = 2;
 }
 
-
 //+++++++++++++++++Role Management+++++++++++++
+
 message Role {
     string id = 1;
     string name = 2;

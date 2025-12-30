@@ -72,6 +72,7 @@ type AuthServiceClient interface {
 	ChangePassword(ctx context.Context, in *ChangePasswordRequest, opts ...grpc.CallOption) (*ChangePasswordResponse, error)
 	ResetPasswordRequest(ctx context.Context, in *ResetPasswordRequestMsg, opts ...grpc.CallOption) (*ResetPasswordResponse, error)
 	ResetPassword(ctx context.Context, in *ResetPasswordMsg, opts ...grpc.CallOption) (*ResetPasswordResponse, error)
+	// Permission Management
 	CreatePermission(ctx context.Context, in *CreatePermissionRequest, opts ...grpc.CallOption) (*CreatePermissionResponse, error)
 	UpdatePermission(ctx context.Context, in *UpdatePermissionRequest, opts ...grpc.CallOption) (*UpdatePermissionResponse, error)
 	DeletePermission(ctx context.Context, in *DeletePermissionRequest, opts ...grpc.CallOption) (*DeletePermissionResponse, error)
@@ -80,14 +81,15 @@ type AuthServiceClient interface {
 	GetUserPermission(ctx context.Context, in *GetUserPermissionRequest, opts ...grpc.CallOption) (*GetUserPermissionResponse, error)
 	AssignPermissionToUser(ctx context.Context, in *AssignPermissionToUserRequest, opts ...grpc.CallOption) (*AssignPermissionToUserResponse, error)
 	RemovePermissionFromUser(ctx context.Context, in *RemovePermissionFromUserRequest, opts ...grpc.CallOption) (*RemovePermissionFromUserResponse, error)
-	AssignPermissionToRole(ctx context.Context, in *AssignRoleToUserRequest, opts ...grpc.CallOption) (*AssignRoleToUserResponse, error)
+	AssignPermissionToRole(ctx context.Context, in *AssignPermissionToRoleRequest, opts ...grpc.CallOption) (*AssignPermissionToRoleResponse, error)
 	RemovePermissionFromRole(ctx context.Context, in *RemovePermissionFromRoleRequest, opts ...grpc.CallOption) (*RemovePermissionFromRoleResponse, error)
+	// Role Management
 	CreateRole(ctx context.Context, in *CreateRoleRequest, opts ...grpc.CallOption) (*CreateRoleResponse, error)
 	UpdateRole(ctx context.Context, in *UpdateRoleRequest, opts ...grpc.CallOption) (*UpdateRoleResponse, error)
 	DeleteRole(ctx context.Context, in *DeleteRoleRequest, opts ...grpc.CallOption) (*DeleteRoleResponse, error)
 	GetAllRoles(ctx context.Context, in *GetAllRoleRequest, opts ...grpc.CallOption) (*GetAllRoleResponse, error)
 	GetRolePermissions(ctx context.Context, in *GetRolePermissionsRequest, opts ...grpc.CallOption) (*GetRolePermissionsResponse, error)
-	AssignRoleToUser(ctx context.Context, in *AssignPermissionToRoleRequest, opts ...grpc.CallOption) (*AssignRoleToUserResponse, error)
+	AssignRoleToUser(ctx context.Context, in *AssignRoleToUserRequest, opts ...grpc.CallOption) (*AssignRoleToUserResponse, error)
 	RemoveRoleFromUser(ctx context.Context, in *RemoveRoleFromUserRequest, opts ...grpc.CallOption) (*RemoveRoleFromUserResponse, error)
 }
 
@@ -329,9 +331,9 @@ func (c *authServiceClient) RemovePermissionFromUser(ctx context.Context, in *Re
 	return out, nil
 }
 
-func (c *authServiceClient) AssignPermissionToRole(ctx context.Context, in *AssignRoleToUserRequest, opts ...grpc.CallOption) (*AssignRoleToUserResponse, error) {
+func (c *authServiceClient) AssignPermissionToRole(ctx context.Context, in *AssignPermissionToRoleRequest, opts ...grpc.CallOption) (*AssignPermissionToRoleResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AssignRoleToUserResponse)
+	out := new(AssignPermissionToRoleResponse)
 	err := c.cc.Invoke(ctx, AuthService_AssignPermissionToRole_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -399,7 +401,7 @@ func (c *authServiceClient) GetRolePermissions(ctx context.Context, in *GetRoleP
 	return out, nil
 }
 
-func (c *authServiceClient) AssignRoleToUser(ctx context.Context, in *AssignPermissionToRoleRequest, opts ...grpc.CallOption) (*AssignRoleToUserResponse, error) {
+func (c *authServiceClient) AssignRoleToUser(ctx context.Context, in *AssignRoleToUserRequest, opts ...grpc.CallOption) (*AssignRoleToUserResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AssignRoleToUserResponse)
 	err := c.cc.Invoke(ctx, AuthService_AssignRoleToUser_FullMethodName, in, out, cOpts...)
@@ -438,6 +440,7 @@ type AuthServiceServer interface {
 	ChangePassword(context.Context, *ChangePasswordRequest) (*ChangePasswordResponse, error)
 	ResetPasswordRequest(context.Context, *ResetPasswordRequestMsg) (*ResetPasswordResponse, error)
 	ResetPassword(context.Context, *ResetPasswordMsg) (*ResetPasswordResponse, error)
+	// Permission Management
 	CreatePermission(context.Context, *CreatePermissionRequest) (*CreatePermissionResponse, error)
 	UpdatePermission(context.Context, *UpdatePermissionRequest) (*UpdatePermissionResponse, error)
 	DeletePermission(context.Context, *DeletePermissionRequest) (*DeletePermissionResponse, error)
@@ -446,14 +449,15 @@ type AuthServiceServer interface {
 	GetUserPermission(context.Context, *GetUserPermissionRequest) (*GetUserPermissionResponse, error)
 	AssignPermissionToUser(context.Context, *AssignPermissionToUserRequest) (*AssignPermissionToUserResponse, error)
 	RemovePermissionFromUser(context.Context, *RemovePermissionFromUserRequest) (*RemovePermissionFromUserResponse, error)
-	AssignPermissionToRole(context.Context, *AssignRoleToUserRequest) (*AssignRoleToUserResponse, error)
+	AssignPermissionToRole(context.Context, *AssignPermissionToRoleRequest) (*AssignPermissionToRoleResponse, error)
 	RemovePermissionFromRole(context.Context, *RemovePermissionFromRoleRequest) (*RemovePermissionFromRoleResponse, error)
+	// Role Management
 	CreateRole(context.Context, *CreateRoleRequest) (*CreateRoleResponse, error)
 	UpdateRole(context.Context, *UpdateRoleRequest) (*UpdateRoleResponse, error)
 	DeleteRole(context.Context, *DeleteRoleRequest) (*DeleteRoleResponse, error)
 	GetAllRoles(context.Context, *GetAllRoleRequest) (*GetAllRoleResponse, error)
 	GetRolePermissions(context.Context, *GetRolePermissionsRequest) (*GetRolePermissionsResponse, error)
-	AssignRoleToUser(context.Context, *AssignPermissionToRoleRequest) (*AssignRoleToUserResponse, error)
+	AssignRoleToUser(context.Context, *AssignRoleToUserRequest) (*AssignRoleToUserResponse, error)
 	RemoveRoleFromUser(context.Context, *RemoveRoleFromUserRequest) (*RemoveRoleFromUserResponse, error)
 	mustEmbedUnimplementedAuthServiceServer()
 }
@@ -534,7 +538,7 @@ func (UnimplementedAuthServiceServer) AssignPermissionToUser(context.Context, *A
 func (UnimplementedAuthServiceServer) RemovePermissionFromUser(context.Context, *RemovePermissionFromUserRequest) (*RemovePermissionFromUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemovePermissionFromUser not implemented")
 }
-func (UnimplementedAuthServiceServer) AssignPermissionToRole(context.Context, *AssignRoleToUserRequest) (*AssignRoleToUserResponse, error) {
+func (UnimplementedAuthServiceServer) AssignPermissionToRole(context.Context, *AssignPermissionToRoleRequest) (*AssignPermissionToRoleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AssignPermissionToRole not implemented")
 }
 func (UnimplementedAuthServiceServer) RemovePermissionFromRole(context.Context, *RemovePermissionFromRoleRequest) (*RemovePermissionFromRoleResponse, error) {
@@ -555,7 +559,7 @@ func (UnimplementedAuthServiceServer) GetAllRoles(context.Context, *GetAllRoleRe
 func (UnimplementedAuthServiceServer) GetRolePermissions(context.Context, *GetRolePermissionsRequest) (*GetRolePermissionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRolePermissions not implemented")
 }
-func (UnimplementedAuthServiceServer) AssignRoleToUser(context.Context, *AssignPermissionToRoleRequest) (*AssignRoleToUserResponse, error) {
+func (UnimplementedAuthServiceServer) AssignRoleToUser(context.Context, *AssignRoleToUserRequest) (*AssignRoleToUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AssignRoleToUser not implemented")
 }
 func (UnimplementedAuthServiceServer) RemoveRoleFromUser(context.Context, *RemoveRoleFromUserRequest) (*RemoveRoleFromUserResponse, error) {
@@ -997,7 +1001,7 @@ func _AuthService_RemovePermissionFromUser_Handler(srv interface{}, ctx context.
 }
 
 func _AuthService_AssignPermissionToRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AssignRoleToUserRequest)
+	in := new(AssignPermissionToRoleRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1009,7 +1013,7 @@ func _AuthService_AssignPermissionToRole_Handler(srv interface{}, ctx context.Co
 		FullMethod: AuthService_AssignPermissionToRole_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServiceServer).AssignPermissionToRole(ctx, req.(*AssignRoleToUserRequest))
+		return srv.(AuthServiceServer).AssignPermissionToRole(ctx, req.(*AssignPermissionToRoleRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1123,7 +1127,7 @@ func _AuthService_GetRolePermissions_Handler(srv interface{}, ctx context.Contex
 }
 
 func _AuthService_AssignRoleToUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AssignPermissionToRoleRequest)
+	in := new(AssignRoleToUserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1135,7 +1139,7 @@ func _AuthService_AssignRoleToUser_Handler(srv interface{}, ctx context.Context,
 		FullMethod: AuthService_AssignRoleToUser_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServiceServer).AssignRoleToUser(ctx, req.(*AssignPermissionToRoleRequest))
+		return srv.(AuthServiceServer).AssignRoleToUser(ctx, req.(*AssignRoleToUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

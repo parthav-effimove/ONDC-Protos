@@ -553,7 +553,6 @@ func (x *VerifyOTPRequest) GetRequestId() string {
 	return ""
 }
 
-// ++++++++++++++++Token Managememt+++++++++++++++
 type ValidateTokenRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
@@ -1610,7 +1609,6 @@ func (x *UserInfo) GetUpdatedAt() int64 {
 	return 0
 }
 
-// ++++++++++++++permission management+++++++++++++++++
 type Permission struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -2783,7 +2781,6 @@ func (x *DeletePermissionResponse) GetMessage() string {
 	return ""
 }
 
-// +++++++++++++++++Role Management+++++++++++++
 type Role struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -3842,7 +3839,7 @@ const file_protos_ondc_auth_v1_auth_proto_rawDesc = "" +
 	"\arole_id\x18\x02 \x01(\tR\x06roleId\"P\n" +
 	"\x1aRemoveRoleFromUserResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage2\x9a\x13\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage2\xa0\x13\n" +
 	"\vAuthService\x121\n" +
 	"\x06SignUp\x12\x13.auth.SignUpRequest\x1a\x12.auth.AuthResponse\x121\n" +
 	"\x06SignIn\x12\x13.auth.SignInRequest\x1a\x12.auth.AuthResponse\x126\n" +
@@ -3867,8 +3864,8 @@ const file_protos_ondc_auth_v1_auth_proto_rawDesc = "" +
 	"\x16GetPermissionByService\x12#.auth.GetPermissionByServiceRequest\x1a$.auth.GetPermissionByServiceResponse\x12T\n" +
 	"\x11GetUserPermission\x12\x1e.auth.GetUserPermissionRequest\x1a\x1f.auth.GetUserPermissionResponse\x12c\n" +
 	"\x16AssignPermissionToUser\x12#.auth.AssignPermissionToUserRequest\x1a$.auth.AssignPermissionToUserResponse\x12i\n" +
-	"\x18RemovePermissionFromUser\x12%.auth.RemovePermissionFromUserRequest\x1a&.auth.RemovePermissionFromUserResponse\x12W\n" +
-	"\x16AssignPermissionToRole\x12\x1d.auth.AssignRoleToUserRequest\x1a\x1e.auth.AssignRoleToUserResponse\x12i\n" +
+	"\x18RemovePermissionFromUser\x12%.auth.RemovePermissionFromUserRequest\x1a&.auth.RemovePermissionFromUserResponse\x12c\n" +
+	"\x16AssignPermissionToRole\x12#.auth.AssignPermissionToRoleRequest\x1a$.auth.AssignPermissionToRoleResponse\x12i\n" +
 	"\x18RemovePermissionFromRole\x12%.auth.RemovePermissionFromRoleRequest\x1a&.auth.RemovePermissionFromRoleResponse\x12?\n" +
 	"\n" +
 	"CreateRole\x12\x17.auth.CreateRoleRequest\x1a\x18.auth.CreateRoleResponse\x12?\n" +
@@ -3877,8 +3874,8 @@ const file_protos_ondc_auth_v1_auth_proto_rawDesc = "" +
 	"\n" +
 	"DeleteRole\x12\x17.auth.DeleteRoleRequest\x1a\x18.auth.DeleteRoleResponse\x12@\n" +
 	"\vGetAllRoles\x12\x17.auth.GetAllRoleRequest\x1a\x18.auth.GetAllRoleResponse\x12W\n" +
-	"\x12GetRolePermissions\x12\x1f.auth.GetRolePermissionsRequest\x1a .auth.GetRolePermissionsResponse\x12W\n" +
-	"\x10AssignRoleToUser\x12#.auth.AssignPermissionToRoleRequest\x1a\x1e.auth.AssignRoleToUserResponse\x12W\n" +
+	"\x12GetRolePermissions\x12\x1f.auth.GetRolePermissionsRequest\x1a .auth.GetRolePermissionsResponse\x12Q\n" +
+	"\x10AssignRoleToUser\x12\x1d.auth.AssignRoleToUserRequest\x1a\x1e.auth.AssignRoleToUserResponse\x12W\n" +
 	"\x12RemoveRoleFromUser\x12\x1f.auth.RemoveRoleFromUserRequest\x1a .auth.RemoveRoleFromUserResponseB@Z>github.com/parthav-effimove/ONDC-Protos/protos/ondc/auth/v1;v1b\x06proto3"
 
 var (
@@ -3995,14 +3992,14 @@ var file_protos_ondc_auth_v1_auth_proto_depIdxs = []int32{
 	34, // 32: auth.AuthService.GetUserPermission:input_type -> auth.GetUserPermissionRequest
 	36, // 33: auth.AuthService.AssignPermissionToUser:input_type -> auth.AssignPermissionToUserRequest
 	38, // 34: auth.AuthService.RemovePermissionFromUser:input_type -> auth.RemovePermissionFromUserRequest
-	59, // 35: auth.AuthService.AssignPermissionToRole:input_type -> auth.AssignRoleToUserRequest
+	40, // 35: auth.AuthService.AssignPermissionToRole:input_type -> auth.AssignPermissionToRoleRequest
 	42, // 36: auth.AuthService.RemovePermissionFromRole:input_type -> auth.RemovePermissionFromRoleRequest
 	49, // 37: auth.AuthService.CreateRole:input_type -> auth.CreateRoleRequest
 	51, // 38: auth.AuthService.UpdateRole:input_type -> auth.UpdateRoleRequest
 	53, // 39: auth.AuthService.DeleteRole:input_type -> auth.DeleteRoleRequest
 	55, // 40: auth.AuthService.GetAllRoles:input_type -> auth.GetAllRoleRequest
 	57, // 41: auth.AuthService.GetRolePermissions:input_type -> auth.GetRolePermissionsRequest
-	40, // 42: auth.AuthService.AssignRoleToUser:input_type -> auth.AssignPermissionToRoleRequest
+	59, // 42: auth.AuthService.AssignRoleToUser:input_type -> auth.AssignRoleToUserRequest
 	61, // 43: auth.AuthService.RemoveRoleFromUser:input_type -> auth.RemoveRoleFromUserRequest
 	0,  // 44: auth.AuthService.SignUp:output_type -> auth.AuthResponse
 	0,  // 45: auth.AuthService.SignIn:output_type -> auth.AuthResponse
@@ -4027,7 +4024,7 @@ var file_protos_ondc_auth_v1_auth_proto_depIdxs = []int32{
 	35, // 64: auth.AuthService.GetUserPermission:output_type -> auth.GetUserPermissionResponse
 	37, // 65: auth.AuthService.AssignPermissionToUser:output_type -> auth.AssignPermissionToUserResponse
 	39, // 66: auth.AuthService.RemovePermissionFromUser:output_type -> auth.RemovePermissionFromUserResponse
-	60, // 67: auth.AuthService.AssignPermissionToRole:output_type -> auth.AssignRoleToUserResponse
+	41, // 67: auth.AuthService.AssignPermissionToRole:output_type -> auth.AssignPermissionToRoleResponse
 	43, // 68: auth.AuthService.RemovePermissionFromRole:output_type -> auth.RemovePermissionFromRoleResponse
 	50, // 69: auth.AuthService.CreateRole:output_type -> auth.CreateRoleResponse
 	52, // 70: auth.AuthService.UpdateRole:output_type -> auth.UpdateRoleResponse
