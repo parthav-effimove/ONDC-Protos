@@ -51,6 +51,8 @@ const (
 	AuthService_GetRolePermissions_FullMethodName       = "/auth.AuthService/GetRolePermissions"
 	AuthService_AssignRoleToUser_FullMethodName         = "/auth.AuthService/AssignRoleToUser"
 	AuthService_RemoveRoleFromUser_FullMethodName       = "/auth.AuthService/RemoveRoleFromUser"
+	AuthService_OAuthAuthorize_FullMethodName           = "/auth.AuthService/OAuthAuthorize"
+	AuthService_OAuthCallback_FullMethodName            = "/auth.AuthService/OAuthCallback"
 )
 
 // AuthServiceClient is the client API for AuthService service.
@@ -91,6 +93,9 @@ type AuthServiceClient interface {
 	GetRolePermissions(ctx context.Context, in *GetRolePermissionsRequest, opts ...grpc.CallOption) (*GetRolePermissionsResponse, error)
 	AssignRoleToUser(ctx context.Context, in *AssignRoleToUserRequest, opts ...grpc.CallOption) (*AssignRoleToUserResponse, error)
 	RemoveRoleFromUser(ctx context.Context, in *RemoveRoleFromUserRequest, opts ...grpc.CallOption) (*RemoveRoleFromUserResponse, error)
+	// Oauth
+	OAuthAuthorize(ctx context.Context, in *OAuthAuthorizeRequest, opts ...grpc.CallOption) (*OAuthAuthorizeResponse, error)
+	OAuthCallback(ctx context.Context, in *OAuthCallbackRequest, opts ...grpc.CallOption) (*AuthResponse, error)
 }
 
 type authServiceClient struct {
@@ -421,6 +426,26 @@ func (c *authServiceClient) RemoveRoleFromUser(ctx context.Context, in *RemoveRo
 	return out, nil
 }
 
+func (c *authServiceClient) OAuthAuthorize(ctx context.Context, in *OAuthAuthorizeRequest, opts ...grpc.CallOption) (*OAuthAuthorizeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(OAuthAuthorizeResponse)
+	err := c.cc.Invoke(ctx, AuthService_OAuthAuthorize_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) OAuthCallback(ctx context.Context, in *OAuthCallbackRequest, opts ...grpc.CallOption) (*AuthResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AuthResponse)
+	err := c.cc.Invoke(ctx, AuthService_OAuthCallback_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AuthServiceServer is the server API for AuthService service.
 // All implementations must embed UnimplementedAuthServiceServer
 // for forward compatibility.
@@ -459,6 +484,9 @@ type AuthServiceServer interface {
 	GetRolePermissions(context.Context, *GetRolePermissionsRequest) (*GetRolePermissionsResponse, error)
 	AssignRoleToUser(context.Context, *AssignRoleToUserRequest) (*AssignRoleToUserResponse, error)
 	RemoveRoleFromUser(context.Context, *RemoveRoleFromUserRequest) (*RemoveRoleFromUserResponse, error)
+	// Oauth
+	OAuthAuthorize(context.Context, *OAuthAuthorizeRequest) (*OAuthAuthorizeResponse, error)
+	OAuthCallback(context.Context, *OAuthCallbackRequest) (*AuthResponse, error)
 	mustEmbedUnimplementedAuthServiceServer()
 }
 
@@ -564,6 +592,12 @@ func (UnimplementedAuthServiceServer) AssignRoleToUser(context.Context, *AssignR
 }
 func (UnimplementedAuthServiceServer) RemoveRoleFromUser(context.Context, *RemoveRoleFromUserRequest) (*RemoveRoleFromUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveRoleFromUser not implemented")
+}
+func (UnimplementedAuthServiceServer) OAuthAuthorize(context.Context, *OAuthAuthorizeRequest) (*OAuthAuthorizeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OAuthAuthorize not implemented")
+}
+func (UnimplementedAuthServiceServer) OAuthCallback(context.Context, *OAuthCallbackRequest) (*AuthResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OAuthCallback not implemented")
 }
 func (UnimplementedAuthServiceServer) mustEmbedUnimplementedAuthServiceServer() {}
 func (UnimplementedAuthServiceServer) testEmbeddedByValue()                     {}
@@ -1162,6 +1196,42 @@ func _AuthService_RemoveRoleFromUser_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AuthService_OAuthAuthorize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OAuthAuthorizeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).OAuthAuthorize(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_OAuthAuthorize_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).OAuthAuthorize(ctx, req.(*OAuthAuthorizeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_OAuthCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OAuthCallbackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).OAuthCallback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_OAuthCallback_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).OAuthCallback(ctx, req.(*OAuthCallbackRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AuthService_ServiceDesc is the grpc.ServiceDesc for AuthService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1296,6 +1366,14 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RemoveRoleFromUser",
 			Handler:    _AuthService_RemoveRoleFromUser_Handler,
+		},
+		{
+			MethodName: "OAuthAuthorize",
+			Handler:    _AuthService_OAuthAuthorize_Handler,
+		},
+		{
+			MethodName: "OAuthCallback",
+			Handler:    _AuthService_OAuthCallback_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

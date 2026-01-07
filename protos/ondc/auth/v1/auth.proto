@@ -45,6 +45,10 @@ service AuthService {
     rpc GetRolePermissions(GetRolePermissionsRequest) returns (GetRolePermissionsResponse);
     rpc AssignRoleToUser(AssignRoleToUserRequest) returns (AssignRoleToUserResponse);
     rpc RemoveRoleFromUser(RemoveRoleFromUserRequest) returns (RemoveRoleFromUserResponse);
+
+    //Oauth 
+    rpc OAuthAuthorize(OAuthAuthorizeRequest) returns (OAuthAuthorizeResponse);
+    rpc OAuthCallback(OAuthCallbackRequest) returns (AuthResponse);
 }
 
 //+++++++++++++++++++Authentication+++++++++++++++++++++
@@ -408,4 +412,21 @@ message RemoveRoleFromUserRequest {
 message RemoveRoleFromUserResponse {
     bool success = 1;
     string message = 2;
+}
+//-------------OAuth -------------
+message OAuthAuthorizeRequest {
+  string provider = 1;      
+  string redirect_uri = 2;  
+}
+
+message OAuthAuthorizeResponse {
+  bool success = 1;
+  string authorization_url = 2;
+  string state = 3;
+}
+
+message OAuthCallbackRequest {
+  string provider = 1;
+  string code = 2;
+  string state = 3;
 }

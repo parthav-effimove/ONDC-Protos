@@ -3585,6 +3585,179 @@ func (x *RemoveRoleFromUserResponse) GetMessage() string {
 	return ""
 }
 
+// -------------OAuth -------------
+type OAuthAuthorizeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Provider      string                 `protobuf:"bytes,1,opt,name=provider,proto3" json:"provider,omitempty"`
+	RedirectUri   string                 `protobuf:"bytes,2,opt,name=redirect_uri,json=redirectUri,proto3" json:"redirect_uri,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *OAuthAuthorizeRequest) Reset() {
+	*x = OAuthAuthorizeRequest{}
+	mi := &file_protos_ondc_auth_v1_auth_proto_msgTypes[63]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OAuthAuthorizeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OAuthAuthorizeRequest) ProtoMessage() {}
+
+func (x *OAuthAuthorizeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protos_ondc_auth_v1_auth_proto_msgTypes[63]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OAuthAuthorizeRequest.ProtoReflect.Descriptor instead.
+func (*OAuthAuthorizeRequest) Descriptor() ([]byte, []int) {
+	return file_protos_ondc_auth_v1_auth_proto_rawDescGZIP(), []int{63}
+}
+
+func (x *OAuthAuthorizeRequest) GetProvider() string {
+	if x != nil {
+		return x.Provider
+	}
+	return ""
+}
+
+func (x *OAuthAuthorizeRequest) GetRedirectUri() string {
+	if x != nil {
+		return x.RedirectUri
+	}
+	return ""
+}
+
+type OAuthAuthorizeResponse struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Success          bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	AuthorizationUrl string                 `protobuf:"bytes,2,opt,name=authorization_url,json=authorizationUrl,proto3" json:"authorization_url,omitempty"`
+	State            string                 `protobuf:"bytes,3,opt,name=state,proto3" json:"state,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *OAuthAuthorizeResponse) Reset() {
+	*x = OAuthAuthorizeResponse{}
+	mi := &file_protos_ondc_auth_v1_auth_proto_msgTypes[64]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OAuthAuthorizeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OAuthAuthorizeResponse) ProtoMessage() {}
+
+func (x *OAuthAuthorizeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_protos_ondc_auth_v1_auth_proto_msgTypes[64]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OAuthAuthorizeResponse.ProtoReflect.Descriptor instead.
+func (*OAuthAuthorizeResponse) Descriptor() ([]byte, []int) {
+	return file_protos_ondc_auth_v1_auth_proto_rawDescGZIP(), []int{64}
+}
+
+func (x *OAuthAuthorizeResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *OAuthAuthorizeResponse) GetAuthorizationUrl() string {
+	if x != nil {
+		return x.AuthorizationUrl
+	}
+	return ""
+}
+
+func (x *OAuthAuthorizeResponse) GetState() string {
+	if x != nil {
+		return x.State
+	}
+	return ""
+}
+
+type OAuthCallbackRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Provider      string                 `protobuf:"bytes,1,opt,name=provider,proto3" json:"provider,omitempty"`
+	Code          string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
+	State         string                 `protobuf:"bytes,3,opt,name=state,proto3" json:"state,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *OAuthCallbackRequest) Reset() {
+	*x = OAuthCallbackRequest{}
+	mi := &file_protos_ondc_auth_v1_auth_proto_msgTypes[65]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OAuthCallbackRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OAuthCallbackRequest) ProtoMessage() {}
+
+func (x *OAuthCallbackRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protos_ondc_auth_v1_auth_proto_msgTypes[65]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OAuthCallbackRequest.ProtoReflect.Descriptor instead.
+func (*OAuthCallbackRequest) Descriptor() ([]byte, []int) {
+	return file_protos_ondc_auth_v1_auth_proto_rawDescGZIP(), []int{65}
+}
+
+func (x *OAuthCallbackRequest) GetProvider() string {
+	if x != nil {
+		return x.Provider
+	}
+	return ""
+}
+
+func (x *OAuthCallbackRequest) GetCode() string {
+	if x != nil {
+		return x.Code
+	}
+	return ""
+}
+
+func (x *OAuthCallbackRequest) GetState() string {
+	if x != nil {
+		return x.State
+	}
+	return ""
+}
+
 var File_protos_ondc_auth_v1_auth_proto protoreflect.FileDescriptor
 
 const file_protos_ondc_auth_v1_auth_proto_rawDesc = "" +
@@ -3839,7 +4012,18 @@ const file_protos_ondc_auth_v1_auth_proto_rawDesc = "" +
 	"\arole_id\x18\x02 \x01(\tR\x06roleId\"P\n" +
 	"\x1aRemoveRoleFromUserResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage2\xa0\x13\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"V\n" +
+	"\x15OAuthAuthorizeRequest\x12\x1a\n" +
+	"\bprovider\x18\x01 \x01(\tR\bprovider\x12!\n" +
+	"\fredirect_uri\x18\x02 \x01(\tR\vredirectUri\"u\n" +
+	"\x16OAuthAuthorizeResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12+\n" +
+	"\x11authorization_url\x18\x02 \x01(\tR\x10authorizationUrl\x12\x14\n" +
+	"\x05state\x18\x03 \x01(\tR\x05state\"\\\n" +
+	"\x14OAuthCallbackRequest\x12\x1a\n" +
+	"\bprovider\x18\x01 \x01(\tR\bprovider\x12\x12\n" +
+	"\x04code\x18\x02 \x01(\tR\x04code\x12\x14\n" +
+	"\x05state\x18\x03 \x01(\tR\x05state2\xae\x14\n" +
 	"\vAuthService\x121\n" +
 	"\x06SignUp\x12\x13.auth.SignUpRequest\x1a\x12.auth.AuthResponse\x121\n" +
 	"\x06SignIn\x12\x13.auth.SignInRequest\x1a\x12.auth.AuthResponse\x126\n" +
@@ -3876,7 +4060,9 @@ const file_protos_ondc_auth_v1_auth_proto_rawDesc = "" +
 	"\vGetAllRoles\x12\x17.auth.GetAllRoleRequest\x1a\x18.auth.GetAllRoleResponse\x12W\n" +
 	"\x12GetRolePermissions\x12\x1f.auth.GetRolePermissionsRequest\x1a .auth.GetRolePermissionsResponse\x12Q\n" +
 	"\x10AssignRoleToUser\x12\x1d.auth.AssignRoleToUserRequest\x1a\x1e.auth.AssignRoleToUserResponse\x12W\n" +
-	"\x12RemoveRoleFromUser\x12\x1f.auth.RemoveRoleFromUserRequest\x1a .auth.RemoveRoleFromUserResponseB@Z>github.com/parthav-effimove/ONDC-Protos/protos/ondc/auth/v1;v1b\x06proto3"
+	"\x12RemoveRoleFromUser\x12\x1f.auth.RemoveRoleFromUserRequest\x1a .auth.RemoveRoleFromUserResponse\x12K\n" +
+	"\x0eOAuthAuthorize\x12\x1b.auth.OAuthAuthorizeRequest\x1a\x1c.auth.OAuthAuthorizeResponse\x12?\n" +
+	"\rOAuthCallback\x12\x1a.auth.OAuthCallbackRequest\x1a\x12.auth.AuthResponseB@Z>github.com/parthav-effimove/ONDC-Protos/protos/ondc/auth/v1;v1b\x06proto3"
 
 var (
 	file_protos_ondc_auth_v1_auth_proto_rawDescOnce sync.Once
@@ -3890,7 +4076,7 @@ func file_protos_ondc_auth_v1_auth_proto_rawDescGZIP() []byte {
 	return file_protos_ondc_auth_v1_auth_proto_rawDescData
 }
 
-var file_protos_ondc_auth_v1_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 63)
+var file_protos_ondc_auth_v1_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 66)
 var file_protos_ondc_auth_v1_auth_proto_goTypes = []any{
 	(*AuthResponse)(nil),                     // 0: auth.AuthResponse
 	(*SignUpRequest)(nil),                    // 1: auth.SignUpRequest
@@ -3955,6 +4141,9 @@ var file_protos_ondc_auth_v1_auth_proto_goTypes = []any{
 	(*AssignRoleToUserResponse)(nil),         // 60: auth.AssignRoleToUserResponse
 	(*RemoveRoleFromUserRequest)(nil),        // 61: auth.RemoveRoleFromUserRequest
 	(*RemoveRoleFromUserResponse)(nil),       // 62: auth.RemoveRoleFromUserResponse
+	(*OAuthAuthorizeRequest)(nil),            // 63: auth.OAuthAuthorizeRequest
+	(*OAuthAuthorizeResponse)(nil),           // 64: auth.OAuthAuthorizeResponse
+	(*OAuthCallbackRequest)(nil),             // 65: auth.OAuthCallbackRequest
 }
 var file_protos_ondc_auth_v1_auth_proto_depIdxs = []int32{
 	26, // 0: auth.AuthResponse.user:type_name -> auth.UserInfo
@@ -4001,40 +4190,44 @@ var file_protos_ondc_auth_v1_auth_proto_depIdxs = []int32{
 	57, // 41: auth.AuthService.GetRolePermissions:input_type -> auth.GetRolePermissionsRequest
 	59, // 42: auth.AuthService.AssignRoleToUser:input_type -> auth.AssignRoleToUserRequest
 	61, // 43: auth.AuthService.RemoveRoleFromUser:input_type -> auth.RemoveRoleFromUserRequest
-	0,  // 44: auth.AuthService.SignUp:output_type -> auth.AuthResponse
-	0,  // 45: auth.AuthService.SignIn:output_type -> auth.AuthResponse
-	4,  // 46: auth.AuthService.SignOut:output_type -> auth.SignOutResponse
-	0,  // 47: auth.AuthService.RefreshToken:output_type -> auth.AuthResponse
-	7,  // 48: auth.AuthService.SendOTP:output_type -> auth.SendOTPResponse
-	0,  // 49: auth.AuthService.VerifyOTP:output_type -> auth.AuthResponse
-	10, // 50: auth.AuthService.ValidateToken:output_type -> auth.ValidateTokenResponse
-	12, // 51: auth.AuthService.RevokeToken:output_type -> auth.RevokeTokenResponse
-	14, // 52: auth.AuthService.RevokeAllTokens:output_type -> auth.RevokeAllTokensResponse
-	16, // 53: auth.AuthService.GetUserInfo:output_type -> auth.GetUserInfoResponse
-	18, // 54: auth.AuthService.GetUserRoles:output_type -> auth.GetUserRolesResponse
-	20, // 55: auth.AuthService.UpdateUser:output_type -> auth.UpdateUserResponse
-	22, // 56: auth.AuthService.ChangePassword:output_type -> auth.ChangePasswordResponse
-	25, // 57: auth.AuthService.ResetPasswordRequest:output_type -> auth.ResetPasswordResponse
-	25, // 58: auth.AuthService.ResetPassword:output_type -> auth.ResetPasswordResponse
-	29, // 59: auth.AuthService.CreatePermission:output_type -> auth.CreatePermissionResponse
-	45, // 60: auth.AuthService.UpdatePermission:output_type -> auth.UpdatePermissionResponse
-	47, // 61: auth.AuthService.DeletePermission:output_type -> auth.DeletePermissionResponse
-	31, // 62: auth.AuthService.GetAllPermissions:output_type -> auth.GetAllPermissionsResponse
-	33, // 63: auth.AuthService.GetPermissionByService:output_type -> auth.GetPermissionByServiceResponse
-	35, // 64: auth.AuthService.GetUserPermission:output_type -> auth.GetUserPermissionResponse
-	37, // 65: auth.AuthService.AssignPermissionToUser:output_type -> auth.AssignPermissionToUserResponse
-	39, // 66: auth.AuthService.RemovePermissionFromUser:output_type -> auth.RemovePermissionFromUserResponse
-	41, // 67: auth.AuthService.AssignPermissionToRole:output_type -> auth.AssignPermissionToRoleResponse
-	43, // 68: auth.AuthService.RemovePermissionFromRole:output_type -> auth.RemovePermissionFromRoleResponse
-	50, // 69: auth.AuthService.CreateRole:output_type -> auth.CreateRoleResponse
-	52, // 70: auth.AuthService.UpdateRole:output_type -> auth.UpdateRoleResponse
-	54, // 71: auth.AuthService.DeleteRole:output_type -> auth.DeleteRoleResponse
-	56, // 72: auth.AuthService.GetAllRoles:output_type -> auth.GetAllRoleResponse
-	58, // 73: auth.AuthService.GetRolePermissions:output_type -> auth.GetRolePermissionsResponse
-	60, // 74: auth.AuthService.AssignRoleToUser:output_type -> auth.AssignRoleToUserResponse
-	62, // 75: auth.AuthService.RemoveRoleFromUser:output_type -> auth.RemoveRoleFromUserResponse
-	44, // [44:76] is the sub-list for method output_type
-	12, // [12:44] is the sub-list for method input_type
+	63, // 44: auth.AuthService.OAuthAuthorize:input_type -> auth.OAuthAuthorizeRequest
+	65, // 45: auth.AuthService.OAuthCallback:input_type -> auth.OAuthCallbackRequest
+	0,  // 46: auth.AuthService.SignUp:output_type -> auth.AuthResponse
+	0,  // 47: auth.AuthService.SignIn:output_type -> auth.AuthResponse
+	4,  // 48: auth.AuthService.SignOut:output_type -> auth.SignOutResponse
+	0,  // 49: auth.AuthService.RefreshToken:output_type -> auth.AuthResponse
+	7,  // 50: auth.AuthService.SendOTP:output_type -> auth.SendOTPResponse
+	0,  // 51: auth.AuthService.VerifyOTP:output_type -> auth.AuthResponse
+	10, // 52: auth.AuthService.ValidateToken:output_type -> auth.ValidateTokenResponse
+	12, // 53: auth.AuthService.RevokeToken:output_type -> auth.RevokeTokenResponse
+	14, // 54: auth.AuthService.RevokeAllTokens:output_type -> auth.RevokeAllTokensResponse
+	16, // 55: auth.AuthService.GetUserInfo:output_type -> auth.GetUserInfoResponse
+	18, // 56: auth.AuthService.GetUserRoles:output_type -> auth.GetUserRolesResponse
+	20, // 57: auth.AuthService.UpdateUser:output_type -> auth.UpdateUserResponse
+	22, // 58: auth.AuthService.ChangePassword:output_type -> auth.ChangePasswordResponse
+	25, // 59: auth.AuthService.ResetPasswordRequest:output_type -> auth.ResetPasswordResponse
+	25, // 60: auth.AuthService.ResetPassword:output_type -> auth.ResetPasswordResponse
+	29, // 61: auth.AuthService.CreatePermission:output_type -> auth.CreatePermissionResponse
+	45, // 62: auth.AuthService.UpdatePermission:output_type -> auth.UpdatePermissionResponse
+	47, // 63: auth.AuthService.DeletePermission:output_type -> auth.DeletePermissionResponse
+	31, // 64: auth.AuthService.GetAllPermissions:output_type -> auth.GetAllPermissionsResponse
+	33, // 65: auth.AuthService.GetPermissionByService:output_type -> auth.GetPermissionByServiceResponse
+	35, // 66: auth.AuthService.GetUserPermission:output_type -> auth.GetUserPermissionResponse
+	37, // 67: auth.AuthService.AssignPermissionToUser:output_type -> auth.AssignPermissionToUserResponse
+	39, // 68: auth.AuthService.RemovePermissionFromUser:output_type -> auth.RemovePermissionFromUserResponse
+	41, // 69: auth.AuthService.AssignPermissionToRole:output_type -> auth.AssignPermissionToRoleResponse
+	43, // 70: auth.AuthService.RemovePermissionFromRole:output_type -> auth.RemovePermissionFromRoleResponse
+	50, // 71: auth.AuthService.CreateRole:output_type -> auth.CreateRoleResponse
+	52, // 72: auth.AuthService.UpdateRole:output_type -> auth.UpdateRoleResponse
+	54, // 73: auth.AuthService.DeleteRole:output_type -> auth.DeleteRoleResponse
+	56, // 74: auth.AuthService.GetAllRoles:output_type -> auth.GetAllRoleResponse
+	58, // 75: auth.AuthService.GetRolePermissions:output_type -> auth.GetRolePermissionsResponse
+	60, // 76: auth.AuthService.AssignRoleToUser:output_type -> auth.AssignRoleToUserResponse
+	62, // 77: auth.AuthService.RemoveRoleFromUser:output_type -> auth.RemoveRoleFromUserResponse
+	64, // 78: auth.AuthService.OAuthAuthorize:output_type -> auth.OAuthAuthorizeResponse
+	0,  // 79: auth.AuthService.OAuthCallback:output_type -> auth.AuthResponse
+	46, // [46:80] is the sub-list for method output_type
+	12, // [12:46] is the sub-list for method input_type
 	12, // [12:12] is the sub-list for extension type_name
 	12, // [12:12] is the sub-list for extension extendee
 	0,  // [0:12] is the sub-list for field type_name
@@ -4051,7 +4244,7 @@ func file_protos_ondc_auth_v1_auth_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_protos_ondc_auth_v1_auth_proto_rawDesc), len(file_protos_ondc_auth_v1_auth_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   63,
+			NumMessages:   66,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
