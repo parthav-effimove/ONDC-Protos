@@ -607,6 +607,7 @@ type ValidateTokenResponse struct {
 	Permissions   []string               `protobuf:"bytes,6,rep,name=permissions,proto3" json:"permissions,omitempty"`
 	ExpiresAt     int64                  `protobuf:"varint,7,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
 	Message       string                 `protobuf:"bytes,8,opt,name=message,proto3" json:"message,omitempty"`
+	IsVerified    bool                   `protobuf:"varint,9,opt,name=is_verified,json=isVerified,proto3" json:"is_verified,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -695,6 +696,13 @@ func (x *ValidateTokenResponse) GetMessage() string {
 		return x.Message
 	}
 	return ""
+}
+
+func (x *ValidateTokenResponse) GetIsVerified() bool {
+	if x != nil {
+		return x.IsVerified
+	}
+	return false
 }
 
 type RevokeTokenRequest struct {
@@ -3804,7 +3812,7 @@ const file_protos_ondc_auth_v1_auth_proto_rawDesc = "" +
 	"\n" +
 	"request_id\x18\x03 \x01(\tR\trequestId\",\n" +
 	"\x14ValidateTokenRequest\x12\x14\n" +
-	"\x05token\x18\x01 \x01(\tR\x05token\"\xe3\x01\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\"\x84\x02\n" +
 	"\x15ValidateTokenResponse\x12\x14\n" +
 	"\x05valid\x18\x01 \x01(\bR\x05valid\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x14\n" +
@@ -3814,7 +3822,9 @@ const file_protos_ondc_auth_v1_auth_proto_rawDesc = "" +
 	"\vpermissions\x18\x06 \x03(\tR\vpermissions\x12\x1d\n" +
 	"\n" +
 	"expires_at\x18\a \x01(\x03R\texpiresAt\x12\x18\n" +
-	"\amessage\x18\b \x01(\tR\amessage\"9\n" +
+	"\amessage\x18\b \x01(\tR\amessage\x12\x1f\n" +
+	"\vis_verified\x18\t \x01(\bR\n" +
+	"isVerified\"9\n" +
 	"\x12RevokeTokenRequest\x12#\n" +
 	"\rrefresh_token\x18\x01 \x01(\tR\frefreshToken\"I\n" +
 	"\x13RevokeTokenResponse\x12\x18\n" +

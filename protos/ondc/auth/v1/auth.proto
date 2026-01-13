@@ -123,6 +123,7 @@ message ValidateTokenResponse{
     repeated string permissions = 6;
     int64 expires_at = 7;
     string message = 8;
+    bool is_verified = 9;
 }
 
 message RevokeTokenRequest{
